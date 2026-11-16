@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,11 @@
 </head>
 <body>
   <h1>Campus Lost &amp; Found</h1>
+
+  <p>Signed in as <strong th:text="${username}">username</strong></p>
+  <form th:action="@{/logout}" method="post">
+    <button type="submit">Sign out</button>
+  </form>
 
   <!-- Items come from /api/items -->
   <ul id="items"></ul>
