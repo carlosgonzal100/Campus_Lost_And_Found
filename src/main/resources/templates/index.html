@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Campus Lost &amp; Found</title>
+  <!-- CSRF token from Spring Security, sent with the fetch POST below -->
+  <meta name="_csrf" th:content="${_csrf.token}">
+  <meta name="_csrf_header" th:content="${_csrf.headerName}">
   <style>
     body { font-family: Arial, sans-serif; margin: 24px; }
     h1   { color: green; }
@@ -45,9 +48,11 @@
         title: document.getElementById("title").value,
         location: document.getElementById("location").value
       };
+      const csrfToken = document.querySelector('meta[name="_csrf"]').content;
+      const csrfHeader = document.querySelector('meta[name="_csrf_header"]').content;
       await fetch("/api/items", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", [csrfHeader]: csrfToken },
         body: JSON.stringify(item)
       });
       event.target.reset();
