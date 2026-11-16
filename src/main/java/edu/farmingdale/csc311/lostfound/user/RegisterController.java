@@ -23,6 +23,12 @@ public class RegisterController {
         return "register";
     }
 
+    // Shows the sign-in page. Spring Security handles the form when it is submitted.
+    @GetMapping("/login")
+    public String showLogin() {
+        return "login";
+    }
+
     @PostMapping("/register")
     public String register(@RequestParam(defaultValue = "") String username,
                            @RequestParam(defaultValue = "") String password,
