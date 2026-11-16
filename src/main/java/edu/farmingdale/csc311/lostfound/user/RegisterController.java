@@ -1,5 +1,6 @@
 package edu.farmingdale.csc311.lostfound.user;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegisterController {
 
     private final AppUserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
-    public RegisterController(AppUserRepository repository) {
+    public RegisterController(AppUserRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register")
@@ -38,7 +41,8 @@ public class RegisterController {
             return "register";
         }
 
-        // TODO (next step): save the user and redirect to /login?registered
-        return "register";
+        // Save the password as a BCrypt hash, never as plain text.
+        repository.save(new AppUser(username, passwordEncoder.encode(password)));
+        return "redirect:/login?registered";
     }
 }
