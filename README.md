@@ -2,7 +2,7 @@
 
 **Author:** Carlos Gonzalez in collaboration with professor Mooath Alrajab
 
-**Date:** 2024-06-05
+**Date:** 2026-11-15
 
 **Course:** CSC 311 Advanced Programming, Fall 2026
 
